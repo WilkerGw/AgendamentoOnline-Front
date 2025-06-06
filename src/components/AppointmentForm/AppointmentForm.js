@@ -76,7 +76,7 @@ const AppointmentForm = () => {
 
     try {
       // Usar variável de ambiente para a URL da API no futuro
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://agendamento-online-back.vercel.app/api/appointments';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://agendamento-online-back.vercel.app/';
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
