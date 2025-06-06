@@ -1,115 +1,173 @@
-
+/* AppointmentForm.module.css */
 .formContainer {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  backdrop-filter: blur(10px);
+  position: relative; /* Para overlay */
 }
 
-.formContainer h2 {
+.title {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
+  font-size: 2rem;
+  color: #2e2e2e;
+  margin-bottom: 1rem;
+}
+
+.txt {
+  text-align: center;
+  margin-bottom: 2rem;
+  opacity: .6;
+}
+
+.txtData {
+  opacity: .5;
 }
 
 .formGroup {
-  margin-bottom: 1rem;
+  margin-bottom: 1.8rem;
 }
 
-.formGroup label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #555;
-}
-
+/* Estilo dos Inputs e Selects */
 .formGroup input,
 .formGroup select {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  padding: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  background: #f8f9fa;
+  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+  background: white;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.3);
+}
+
+/* Estilização do Select */
+.formGroup select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 3.5rem;
+}
+
+/* Botão de Envio */
+.submitButton {
+  background: linear-gradient(135deg, #009ffd, #0066ff);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+  padding: 12px 20px;
+  width: 100%;
+  height: 3rem;
+  color: white;
+  border: none;
+  cursor: pointer;
   font-size: 1rem;
 }
 
-.submitButton {
-  display: block;
-  width: 100%;
-  padding: 0.9rem;
-  background-color: #0070f3; /* Example blue color */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  position: relative; /* Needed for animation positioning */
-  overflow: hidden; /* Hide overflow from animation */
-}
-
 .submitButton:hover {
-  background-color: #005bb5;
+  background: linear-gradient(135deg, #0066ff, #0033ff);
 }
 
-.submitButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+/* Overlay para fundo opaco */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
-/* Message Styles */
-.message {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-  text-align: center;
-  font-weight: bold;
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.success {
-  background-color: #d4edda; /* Light green */
-  color: #155724; /* Dark green */
-  border: 1px solid #c3e6cb;
+/* Spinner de Carregamento */
+.spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
 }
 
-.error {
-  background-color: #f8d7da; /* Light red */
-  color: #721c24; /* Dark red */
-  border: 1px solid #f5c6cb;
-}
-
-
-/* Spiral Animation */
-@keyframes spiral {
-  0% {
-    transform: scale(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(3) rotate(360deg);
-    opacity: 0;
-  }
-}
-
-.submitButton.loading::after {
-  content: '';
+.spinner::before {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px; /* Adjust size as needed */
-  height: 20px; /* Adjust size as needed */
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  border-top-color: white;
+  width: 40px;
+  height: 40px;
+  border: 5px solid rgba(0, 112, 243, 0.3);
+  border-top-color: #007bff;
   border-radius: 50%;
-  animation: spiral 1s linear infinite;
-  margin-top: -10px; /* Half of height */
-  margin-left: -10px; /* Half of width */
+  animation: rotate 1s linear infinite;
+  transform: translate(-50%, -50%);
 }
 
-/* Hide button text when loading */
-.submitButton.loading span {
-  visibility: hidden;
+.spinner-text {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #007bff;
 }
 
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.message {
+  padding: 1rem 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.message::before {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  background-size: contain;
+}
+
+.success {
+  background: #e6ffed;
+  color: #007bff;
+}
+
+.success::before {
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" width="24" height="24"><path fill="green" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+}
+
+.error {
+  background: #ffebee;
+  color: #dc3545;
+}
+
+.error::before {
+  background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" width="24" height="24"><path fill="red" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>');
+}
