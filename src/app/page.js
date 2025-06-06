@@ -1,5 +1,4 @@
 
-import Image from "next/image";
 import styles from "./page.module.css";
 import AppointmentForm from "@/components/AppointmentForm/AppointmentForm"; // Import the form component
 
