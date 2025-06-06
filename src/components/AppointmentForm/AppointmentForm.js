@@ -76,7 +76,7 @@ const AppointmentForm = () => {
 
     try {
       // Usar variável de ambiente para a URL da API no futuro
-      const apiUrl = 'https://agendamentoonline-back.onrender.com/';
+      const apiUrl = 'https://agendamentoonline-back.onrender.com/api/appointments';
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
